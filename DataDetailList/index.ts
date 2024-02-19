@@ -1,6 +1,8 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
 import * as React from "react";
+import DetailList from "./Component/DetailList";
+
 
 export class DataDetailList implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -32,10 +34,11 @@ export class DataDetailList implements ComponentFramework.ReactControl<IInputs, 
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        const props: IHelloWorldProps = { name: 'Hello, World!' };
-        return React.createElement(
-            HelloWorld, props
-        );
+        // Aqui você pode definir e passar props para o seu DetailList se necessário
+        const props = {
+            // Defina as props que seu DetailList espera, se houver
+        };
+        return React.createElement(DetailList, props);
     }
 
     /**
@@ -43,7 +46,7 @@ export class DataDetailList implements ComponentFramework.ReactControl<IInputs, 
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
      */
     public getOutputs(): IOutputs {
-        return { };
+        return {};
     }
 
     /**
