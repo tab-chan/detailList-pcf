@@ -1,4 +1,4 @@
-# README para o Projeto DetailList com Fluent UI
+# Projeto DetailList com Fluent UI
 
 Este projeto implementa um componente `DetailList` usando Fluent UI React, destinado a exibir uma lista detalhada de itens, que são buscados de forma assíncrona através de um serviço mockado. O projeto é estruturado em três arquivos principais: interfaces (`Interface.tsx`), serviço de dados (`Services.ts`), e o componente da lista detalhada (`DetailList.tsx`).
 
