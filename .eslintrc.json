@@ -4,7 +4,8 @@
       "es2021": true
     },
     "extends": [
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:react/recommended"
     ],
     "globals": {
       "ComponentFramework": true
@@ -20,5 +21,10 @@
     ],
     "rules": {
       "no-unused-vars": "off"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
     }
 }

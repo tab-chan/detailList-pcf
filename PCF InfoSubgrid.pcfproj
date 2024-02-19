@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <Name>PCF InfoSubgrid</Name>
-    <ProjectGuid>60d989c0-1825-4a1f-b4e7-ea515200e514</ProjectGuid>
+    <ProjectGuid>91312bf8-4884-49d9-90a7-2ae1c8f44802</ProjectGuid>
     <OutputPath>$(MSBuildThisFileDirectory)out\controls</OutputPath>
   </PropertyGroup>
 
