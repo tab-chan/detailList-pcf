@@ -1,11 +1,19 @@
-// DetailList.tsx
 import * as React from 'react';
 import { DetailsList, IColumn } from '@fluentui/react';
 import Services from '../Services/Services';
-import { IDataItem, IState, IProps } from '../Interfaces/Interface';
+import { IDataItem, IDataItemDetails } from '../Interfaces/Interface';
+
+interface IState {
+    items: IDataItem[];
+    columns: IColumn[];
+    selectedItemDetails?: IDataItemDetails;
+}
+
+interface IProps {
+    // Adicione quaisquer props adicionais aqui, se necessário
+}
 
 class DetailList extends React.Component<IProps, IState> {
-
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -13,11 +21,11 @@ class DetailList extends React.Component<IProps, IState> {
             columns: [
                 { key: 'column1', name: 'Name', fieldName: 'name', minWidth: 100, maxWidth: 200 },
                 { key: 'column2', name: 'Value', fieldName: 'value', minWidth: 100, maxWidth: 200 },
-                // Defina mais colunas conforme necessário
-            ]
+            ],
+            selectedItemDetails: undefined
         };
     }
-    
+
     componentDidMount() {
         this.loadData();
     }
@@ -25,26 +33,35 @@ class DetailList extends React.Component<IProps, IState> {
     loadData = async () => {
         const data = await Services.getData();
         this.setState({
-            items: data,
-            columns: this.state.columns // Mantendo as colunas definidas no construtor
+            items: data
         });
     }
 
-    onItemInvoked = (item: IDataItem): void => {
+    onItemInvoked = async (item: IDataItem): Promise<void> => {
         console.log('Item invoked:', item);
-        // Potencialmente, recarregar dados ou outra lógica aqui
+        const details = await Services.getDataDetails(item.key);
+        this.setState({ selectedItemDetails: details });
     }
 
     render() {
-        const { items, columns } = this.state;
+        const { items, columns, selectedItemDetails } = this.state;
 
         return (
-            <DetailsList
-              items={items}
-              columns={columns}
-              onItemInvoked={this.onItemInvoked}
-              // Configure outras propriedades conforme necessário
-            />
+            <div>
+                <DetailsList
+                    items={items}
+                    columns={columns}
+                    onItemInvoked={this.onItemInvoked}
+                />
+                {selectedItemDetails && (
+                    <div>
+                        <h3>Detalhes do Item:</h3>
+                        <p>Detalhe 1: {selectedItemDetails.detail1}</p>
+                        <p>Detalhe 2: {selectedItemDetails.detail2}</p>
+                        {/* Renderize mais detalhes conforme necessário */}
+                    </div>
+                )}
+            </div>
         );
     }
 }
