@@ -1,8 +1,5 @@
 import { IColumn } from '@fluentui/react';
 
-
-// Interface.tsx
-
 export interface IDataItem {
     key: string;
     name: string;
@@ -12,15 +9,14 @@ export interface IDataItem {
 export interface IState {
     items: IDataItem[];
     columns: IColumn[];
-    selectedItemDetails?: IDataItemDetails; // Armazena os detalhes do item selecionado
-    
+    selectedItemDetails?: IDataItemDetails;
+    sortedColumnKey?: string; // Identifica a coluna pela qual a lista está sendo ordenada
+    isSortedDescending?: boolean; // Indica se a ordenação é descendente
 }
 
 export interface IProps {
     // Propriedades conforme necessário, por exemplo, passar um identificador para buscar os dados
 }
-
-// Dentro do arquivo Interface.ts ou Interface.tsx
 
 export interface IDataItemDetails {
     key: string;
@@ -28,5 +24,3 @@ export interface IDataItemDetails {
     detail2: string;
     // Inclua outras propriedades conforme necessário para os detalhes do item
 }
-
-

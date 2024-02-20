@@ -1,8 +1,7 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
 import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
 import * as React from "react";
-import DetailList from "./Component/DetailList";
-
+import App from "./App";
 
 export class DataDetailList implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -38,7 +37,7 @@ export class DataDetailList implements ComponentFramework.ReactControl<IInputs, 
         const props = {
             // Defina as props que seu DetailList espera, se houver
         };
-        return React.createElement(DetailList, props);
+        return React.createElement(App, props);
     }
 
     /**
