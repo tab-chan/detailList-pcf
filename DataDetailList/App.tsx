@@ -1,5 +1,5 @@
 import { FluentProvider, webLightTheme } from '@fluentui/react-components';
-import { SortControlledWithPagination as Example } from './Component/DetailList';
+import { SortControlledWithPagination as Example } from './Component/DataGrid';
 import React = require('react');
 
 const App = () => {
