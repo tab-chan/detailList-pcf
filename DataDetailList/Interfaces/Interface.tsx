@@ -24,3 +24,15 @@ export interface IDataItemDetails {
     detail2: string;
     // Inclua outras propriedades conforme necessário para os detalhes do item
 }
+
+// Item interface definition
+export interface Item {
+    occurrenceNumber: string;
+    status: string;
+    channel: string;
+    central: string;
+    additionalSubject: string;
+    creationDate: string;
+    deadline: string;
+    daysOpen: number;
+  }

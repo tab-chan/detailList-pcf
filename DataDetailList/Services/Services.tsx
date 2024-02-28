@@ -1,35 +1,91 @@
 // Services.ts
-import { IDataItem, IDataItemDetails } from '../Interfaces/Interface'; // Ajuste o caminho conforme necessário
+import { IDataItem, IDataItemDetails, Item } from '../Interfaces/Interface'; // Ajuste o caminho conforme necessário
+
+const mockItems: Item[] = [
+  // ... (Your 4 mocked data items here)
+
+  // Additional 6 mocked data items to make it 10 in total
+  {
+    occurrenceNumber: "OC005",
+    status: "Pendente",
+    channel: "Email",
+    central: "Central 5",
+    additionalSubject: "Informações de conta",
+    creationDate: "2024-02-14",
+    deadline: "2024-02-24",
+    daysOpen: 4,
+  },
+  {
+    occurrenceNumber: "OC006",
+    status: "Em progresso",
+    channel: "Chat",
+    central: "Central 1",
+    additionalSubject: "Suporte técnico",
+    creationDate: "2024-02-15",
+    deadline: "2024-02-25",
+    daysOpen: 3,
+  },
+  {
+    occurrenceNumber: "OC007",
+    status: "Cancelado",
+    channel: "Telefone",
+    central: "Central 2",
+    additionalSubject: "Elogio",
+    creationDate: "2024-02-16",
+    deadline: "2024-02-26",
+    daysOpen: 1,
+  },
+  {
+    occurrenceNumber: "OC008",
+    status: "Em análise",
+    channel: "Presencial",
+    central: "Central 3",
+    additionalSubject: "Feedback do produto",
+    creationDate: "2024-02-17",
+    deadline: "2024-02-27",
+    daysOpen: 2,
+  },
+  {
+    occurrenceNumber: "OC009",
+    status: "Resolvido",
+    channel: "Email",
+    central: "Central 4",
+    additionalSubject: "Questão técnica",
+    creationDate: "2024-02-18",
+    deadline: "2024-02-28",
+    daysOpen: 0,
+  },
+  {
+    occurrenceNumber: "OC010",
+    status: "Fechado",
+    channel: "Chat",
+    central: "Central 5",
+    additionalSubject: "Atualização de dados",
+    creationDate: "2024-02-19",
+    deadline: "2024-03-01",
+    daysOpen: 5,
+  },
+];
 
 const Services = {
-  getData: async (): Promise<IDataItem[]> => {
+
+  getData: async (): Promise<Item[]> => {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve([
-          { key: '1', name: 'Dado 1', value: 'Outro dado 1' },
-          { key: '2', name: 'Dado 2', value: 'Outro dado 2' },
-          // Adicione mais objetos conforme necessário
-        ]);
+        resolve(mockItems);
       }, 1000);
     });
   },
-  
-  // Método para buscar detalhes de um item específico
-  getDataDetails: async (key: string): Promise<IDataItemDetails> => {
+
+  getDataDetails: async (occurrenceNumber: string): Promise<Item | undefined> => {
     return new Promise(resolve => {
       setTimeout(() => {
-        // Simulação de detalhes para o item baseado no key
-        // Aqui você precisa ajustar para retornar os detalhes reais esperados
-        const details = {
-          key: key,
-          detail1: "Detalhe específico 1 para item " + key,
-          detail2: "Detalhe específico 2 para item " + key,
-          // Adicione mais detalhes conforme necessário
-        };
-        resolve(details);
-      }, 500); // Tempo simulado de resposta menor para diferenciar da lista geral
+        const foundItem = mockItems.find(item => item.occurrenceNumber === occurrenceNumber);
+        resolve(foundItem);
+      }, 500);
     });
-  }
+  },
 };
 
 export default Services;
+export type { Item };

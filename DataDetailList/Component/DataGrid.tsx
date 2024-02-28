@@ -1,9 +1,7 @@
-import type { JSX } from "react";
-import * as React from "react";
+import React, { useEffect, useState } from 'react';
 import { ToggleButton, InfoLabel, makeStyles, tokens, DataGrid, DataGridBody, DataGridCell, DataGridHeader, DataGridHeaderCell, DataGridRow, DataGridProps, TableColumnDefinition, createTableColumn, TableCellLayout, Avatar, PresenceBadgeStatus } from "@fluentui/react-components";
-import { DocumentRegular, EditRegular, FolderRegular, OpenRegular, PeopleRegular, DocumentPdfRegular, VideoRegular } from "@fluentui/react-icons";
 import { ChevronLeft20Regular, ChevronRight20Regular } from '@fluentui/react-icons';
-
+import Services  from "../Services/Services";
 
 const itemsPerPage = 2; // Define quantos itens por página você quer mostrar
 
@@ -17,7 +15,6 @@ type Item = {
   deadline: string;
   daysOpen: number;
 };
-
 
 const items: Item[] = [
   {
@@ -61,7 +58,6 @@ const items: Item[] = [
     daysOpen: 3,
   },
 ];
-
 
 const columns: TableColumnDefinition<Item>[] = [
   createTableColumn<Item>({
@@ -129,16 +125,29 @@ const useStyles = makeStyles({
   },
 });
 
-
 export const SortControlledWithPagination = () => {
-  const [sortState, setSortState] = React.useState<Parameters<NonNullable<DataGridProps["onSortChange"]>>[1]>({ sortColumn: "file", sortDirection: "ascending" });
-  const [currentPage, setCurrentPage] = React.useState(0); // Página atual começa do 0
+  const [sortState, setSortState] = useState<Parameters<NonNullable<DataGridProps["onSortChange"]>>[1]>({
+    sortColumn: "file",
+    sortDirection: "ascending"
+  });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [items, setItems] = useState<Item[]>([]); // Add this line to manage your items state
+  
+  // Presuming you have a styles hook 
   const styles = useStyles();
+
+  // Fetch items when the component mounts
+  useEffect(() => {
+    Services.getData().then(retrievedItems => {
+      setItems(retrievedItems);
+    });
+  }, []);
 
   const onSortChange: DataGridProps["onSortChange"] = (e, nextSortState) => {
     setSortState(nextSortState);
   };
 
+  const itemsPerPage = 5; // Set the number of items per page
   const paginatedItems = items.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -169,7 +178,6 @@ export const SortControlledWithPagination = () => {
         </DataGridBody>
       </DataGrid>
       <div className={styles.container}>
-        
         <ToggleButton size="small" onClick={goToPreviousPage} disabled={currentPage === 0}>
           <ChevronLeft20Regular /> Anterior
         </ToggleButton>
